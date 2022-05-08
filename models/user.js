@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+//Schema of the User Object
 const userSchema = new mongoose.Schema({
     user_name: {
         type:String,
@@ -22,6 +23,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('users', userSchema);
 
+//Using Joi we do a validation of the data sent by the user.
 function validateUser(user) {
     const schema = Joi.object({
       user_name: Joi.string().required(),
@@ -33,6 +35,7 @@ function validateUser(user) {
     return schema.validate(user);
   }
 
+  //validateUpdateUser is used for the Put Method. To prevent the server to request any other params besides the ones being updated.
   function validateUpdateUser(upUser) {
     const schema = Joi.object({
         user_name: Joi.string(),
